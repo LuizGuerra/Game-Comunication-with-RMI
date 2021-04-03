@@ -7,6 +7,12 @@ Game.class:	Game.java GameInterface.class
 GameInterface.class:	GameInterface.java
 						@javac GameInterface.java
 
+Player.class:	Player.java PlayerInterface.class
+				@javac Player.java
+
+PlayerInterface.class:	PlayerInterface.java
+						@javac PlayerInterface.java
+
 GameClient.class:	GameClient.java
 					@javac GameClient.java
 

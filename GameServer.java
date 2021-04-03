@@ -25,5 +25,13 @@ public class GameServer {
             System.out.println("Game server failed");
             e.printStackTrace();
         }
+
+        try {
+            Naming.rebind(ROOT_URL, new Player());
+            System.out.println("Player server is ready");
+        } catch (Exception e) {
+            System.out.println("Player server failed");
+            e.printStackTrace();
+        }
     }
 }

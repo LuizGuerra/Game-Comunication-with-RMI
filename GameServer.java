@@ -3,7 +3,8 @@ import java.rmi.RemoteException;
 
 public class GameServer {
     static final int PORT = 1099;
-    static final String ROOT_URL = "GameServer"
+    static final String ROOT_URL = "GameServer";
+
     public static void main (String[] args) {
 		if	(args.length != 1)  {
 			System.out.println("Uso: java GameServer <numero de jogadores>");
@@ -16,11 +17,12 @@ public class GameServer {
             System.out.println("RMI registry already running");
             remoteException.printStackTrace();
         }
+
         try {
-            Naming.rebind(ROOT_URL, )
-            System.out.println("Server is ready");
+            Naming.rebind(ROOT_URL, new Game());
+            System.out.println("Game server is ready");
         } catch (Exception e) {
-            System.out.println("Server failed");
+            System.out.println("Game server failed");
             e.printStackTrace();
         }
     }

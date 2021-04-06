@@ -1,8 +1,9 @@
 all:	GameClient.class GameServer.class \
-		Game.class GameInterface.class
+		Game.class GameInterface.class \
+		Player.class PlayerInterface.class
 
 Game.class:	Game.java GameInterface.class
-			@javac Notas.java
+			@javac GameInterface.java
 
 GameInterface.class:	GameInterface.java
 						@javac GameInterface.java

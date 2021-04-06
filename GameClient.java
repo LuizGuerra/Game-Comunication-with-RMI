@@ -9,12 +9,13 @@ public class GameClient {
 			System.out.println("Uso: java GameClient <maquina>");
 			System.exit(1);
 		}
-        final String path = "//" + args[0] + "/" + ROOT_URL;
+        final String GAME_PATH = "//" + args[0] + "/" + ROOT_URL;
+        final String PLAYER_PATH = GAME_PATH + "/Player";
         GameInterface gameInterface;
         Integer userID = -1;
         PlayerInterface playerInterface;
         try {
-            gameInterface = (GameInterface) Naming.lookup(path);
+            gameInterface = (GameInterface) Naming.lookup(GAME_PATH);
             userID = gameInterface.register();
             System.out.println("Client @" + userID + " was successfully conected with server!");
         } catch (Exception e) {
@@ -23,7 +24,7 @@ public class GameClient {
         }
         randomInterval();
         try {
-            playerInterface = (PlayerInterface) Naming.lookup(path);
+            playerInterface = (PlayerInterface) Naming.lookup(PLAYER_PATH);
             System.out.println("Player @" + userID + " was successfully conected with server!");
         } catch (Exception e) {
             System.out.println("rmi.Player client failed");

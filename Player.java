@@ -8,9 +8,15 @@ public class Player extends UnicastRemoteObject implements PlayerInterface {
     @Serial private static final long serialVersionUID = 32112312312313L;
     private final Integer BONUS_PROBABILITY = 3; // 3%
     private Random random;
+    private int id;
 
-    public Player() throws RemoteException {
+    public Player(int id) throws RemoteException {
         random = new Random();
+        this.id = id;
+    }
+
+    public int getID() throws RemoteException {
+        return this.id;
     }
 
     public void start() throws RemoteException {
@@ -20,7 +26,7 @@ public class Player extends UnicastRemoteObject implements PlayerInterface {
     public void bonus() throws RemoteException {
         int calculatedProbability = random.nextInt(101); // Because 0% and 100% are valid numbers
         if(BONUS_PROBABILITY < calculatedProbability) {
-            //TODO: Give probability bonus to the player
+            System.out.println("Player @" + id + " received a bonus");
         }
     }
 

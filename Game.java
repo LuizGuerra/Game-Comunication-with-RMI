@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Game extends UnicastRemoteObject implements GameInterface {
     @Serial private static final long serialVersionUID = 12312312312313L;
-    private volatile List<Integer> users;
+    private volatile List<Player> users;
     final int maxNumberOfPlayers;
 
     public Game(int userListSize) throws RemoteException {

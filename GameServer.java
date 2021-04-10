@@ -1,25 +1,27 @@
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 
 public class GameServer {
     static final int PORT = 1099;
     static final String ROOT_URL = "GameServer";
-    static final String PLAYER_URL = "GameServer/Player";
-    private static volatile int connections;
+    static final String PLAYER_URL = "Client";
 
-    static Game game = null;
+    // static Game gameClass = null;
+    // static Game game = null;
     // static Player player = null;
-
+    
     public static void main (String[] args) {
-		if	(args.length != 1)  {
-			System.out.println("Usage: java GameServer <numero de jogadores>");
+        if	(args.length != 2)  {
+            System.out.println("Usage: java GameServer <ip do servidor> <numero de jogadores>");
 			System.exit(1);
 		}
-        System.out.println("Max number of players in game: " + args[0]);
-        int maxPlayers = Integer.parseInt(args[0]);
+        System.out.println("Max number of players in game: " + args[1]);
+        int maxPlayers = Integer.parseInt(args[1]);
         try {
             // System.setProperty(key, value);
-            java.rmi.registry.LocateRegistry.createRegistry(PORT);
+            System.setProperty("java.rmi.server.hostname", args[0]);
+            LocateRegistry.createRegistry(PORT);
             System.out.println("RMI registry ready");
         } catch (RemoteException remoteException) {
             System.out.println("RMI registry already running");
@@ -27,14 +29,45 @@ public class GameServer {
         }
         
         try {
-            game = new Game(maxPlayers);
-            Naming.rebind(ROOT_URL, game);
+            String game = "rmi://" + args[0] + "/" + ROOT_URL;
+            Naming.rebind(game, new Game());
             System.out.println("Game server is ready");
         } catch (Exception e) {
             System.out.println("Game server failed");
             e.printStackTrace();
         }
         
+        while (true) {
+            if (Game.connections == maxPlayers) {
+                Game.playersRMI.forEach((conId, path) -> {
+                    try {
+                        PlayerInterface client = (PlayerInterface) Naming.lookup(path);
+                        client.start();
+                    } catch (Exception e) {
+                        System.out.println("Falha na inicialização");
+                        e.printStackTrace();
+                    }
+
+                });
+            }
+            try {
+                Game.playersRMI.forEach((conId, path) -> {
+                    try {
+                        PlayerInterface client = (PlayerInterface) Naming.lookup(path);
+                        client.verify();
+                    } catch (Exception e) {
+                        System.out.println("Falha na conexão");
+                        e.printStackTrace();
+                    }
+                });
+
+                Thread.sleep(3000); // ??
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+    }
 		// connections deve ser uma variavel da classe Game
 		// que sera incrementada pelo metodo registry
         
@@ -50,5 +83,4 @@ public class GameServer {
         //     System.out.println("Player server failed");
         //     e.printStackTrace();
         // }
-    }
 }

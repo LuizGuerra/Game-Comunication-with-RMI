@@ -34,12 +34,14 @@ public class GameServer {
             System.out.println("Game server failed");
             e.printStackTrace();
         }
-
-        while (true) {
-            if (connections == maxPlayers)) {
-                
-            }
-        }
+        
+		// connections deve ser uma variavel da classe Game
+		// que sera incrementada pelo metodo registry
+        
+        // while (true) {
+        //     if (connections == maxPlayers)) {      
+        //     }
+        // }
         
         // try {
         //     Naming.rebind(PLAYER_URL, new Player());

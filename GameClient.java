@@ -48,8 +48,8 @@ public class GameClient {
             e.printStackTrace();
         }
 
-        server.registry();
-        player.start();
+        // server.registry();
+        // player.start();
 
         // try {
         //     gameInterface = (GameInterface) Naming.lookup(GAME_PATH);

@@ -4,7 +4,7 @@ import java.rmi.registry.LocateRegistry;
 
 public class GameServer {
     static final int PORT = 1099;
-    static final String ROOT_URL = "GameServer";
+    static final String ROOT_URL = ":1099/GameServer";
     static final String PLAYER_URL = "Client";
 
     // static Game gameClass = null;

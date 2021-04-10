@@ -4,8 +4,8 @@ import java.rmi.registry.LocateRegistry;
 import java.util.Random;
 
 public class GameClient {
-    static final int PORT = 1099;
-    static final String ROOT_URL = "GameServer";
+    static final int PORT = 1909;
+    static final String ROOT_URL = ":1099/GameServer";
     static final String PLAYER_URL = "Client";
     
     static Random random = new Random();

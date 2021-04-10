@@ -37,7 +37,7 @@ public class Player extends UnicastRemoteObject implements PlayerInterface {
     }
 
     public void verify() throws RemoteException {
-        
+        System.out.println("Estou conectado");
     }
 
     public static long randomTime() {

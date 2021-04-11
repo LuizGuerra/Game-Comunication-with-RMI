@@ -44,6 +44,7 @@ public class GameServer {
                         System.out.println("print do path: " + path);
                         PlayerInterface client = (PlayerInterface) Naming.lookup(path);
                         System.out.println("Tá passando o lookup!!!!");
+                        System.out.println("Print Client: " + client);
                         client.start();
                     } catch (Exception e) {
                         System.out.println("Falha na inicialização");

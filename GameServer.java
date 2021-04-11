@@ -41,6 +41,7 @@ public class GameServer {
             if (Game.connections == maxPlayers) {
                 Game.playersRMI.forEach((conId, path) -> {
                     try {
+                        System.out.println("print do path: " + path);
                         PlayerInterface client = (PlayerInterface) Naming.lookup(path);
                         client.start();
                     } catch (Exception e) {

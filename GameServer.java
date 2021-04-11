@@ -46,6 +46,7 @@ public class GameServer {
                         System.out.println("Tá passando o lookup!!!!");
                         System.out.println("Print Client: " + client);
                         client.start();
+                        System.out.println("EXECUTOU START");
                     } catch (Exception e) {
                         System.out.println("Falha na inicialização");
                         e.printStackTrace();

@@ -90,6 +90,11 @@ public class GameClient {
         }
         
     }
+
+    public void start() throws RemoteException {
+        System.out.println("Player começou!!!");
+        //start = true;
+    }
 }
     
         // server.registry();

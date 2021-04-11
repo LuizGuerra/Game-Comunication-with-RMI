@@ -40,6 +40,7 @@ public class GameServer {
         while (true) {
             if (Game.connections == maxPlayers) {
                 Game.playersRMI.forEach((conId, path) -> {
+                    System.out.println("print do path: " + path);
                     try {
                         System.out.println("print do path: " + path);
                         PlayerInterface client = (PlayerInterface) Naming.lookup(path);

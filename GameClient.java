@@ -22,7 +22,7 @@ public class GameClient {
         // PlayerInterface playerInterface;
 
         try {
-            System.setProperty("java.rmi.server.hostname", args[0]);
+            System.setProperty("java.rmi.server.hostname", args[1]);
             LocateRegistry.createRegistry(Integer.parseInt(args[2]));
             System.out.println("RMI registry ready");
         } catch (RemoteException remoteException) {
@@ -89,11 +89,6 @@ public class GameClient {
             }
         }
         
-    }
-
-    public void start() throws RemoteException {
-        System.out.println("Player começou!!!");
-        //start = true;
     }
 }
     

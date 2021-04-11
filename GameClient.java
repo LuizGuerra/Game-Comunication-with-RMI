@@ -60,8 +60,10 @@ public class GameClient {
 
         while (true) {
             try {
+                System.out.println("Chegou no try do while");
                 int i = 0;
                 if (userID == -1) {
+                    System.out.println("Entrou no if");
                     userID = server.register(Integer.parseInt(args[2]));
                 }
                 if (Player.start) {

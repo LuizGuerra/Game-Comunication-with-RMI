@@ -4,16 +4,16 @@ import java.rmi.registry.LocateRegistry;
 import java.util.Random;
 
 public class GameClient {
-    static final int PORT = 1909;
-    static final String ROOT_URL = ":1099/GameServer";
+    // static final int SERVER_PORT = 10991;
+    static final String ROOT_URL = ":10991/GameServer";
     static final String PLAYER_URL = "Client";
     
     static Random random = new Random();
 
 
     public static void main(String[] args) throws InterruptedException {
-		if	(args.length != 2)  {
-			System.out.println("Usage: java GameClient <server ip> <client ip>");
+		if	(args.length != 3)  {
+			System.out.println("Usage: java GameClient <server ip> <client ip> <client port>");
 			System.exit(1);
 		}
         // final String GAME_PATH = "//" + args[0] + "/" + ROOT_URL;
@@ -23,7 +23,7 @@ public class GameClient {
 
         try {
             System.setProperty("java.rmi.server.hostname", args[0]);
-            LocateRegistry.createRegistry(PORT);
+            LocateRegistry.createRegistry(Integer.parseInt(args[2]));
             System.out.println("RMI registry ready");
         } catch (RemoteException remoteException) {
             System.out.println("RMI registry already running");
@@ -33,7 +33,7 @@ public class GameClient {
         Integer userID = -1;
 
         try {
-            String client = "rmi://" + args[1] + "/" + PLAYER_URL;
+            String client = "rmi://" + args[1] + ":" + args[2] + "/" + PLAYER_URL;
             Naming.rebind(client, new Player());
             System.out.println("Player RMI is ready");
         } catch (Exception e) {
@@ -42,7 +42,7 @@ public class GameClient {
         }
 
         String serverIP = args[0];
-        String serverConnection = "rmi://" + serverIP + "/" + ROOT_URL;
+        String serverConnection = "rmi://" + serverIP + ROOT_URL;
         
         GameInterface server = null;
 

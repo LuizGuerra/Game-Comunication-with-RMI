@@ -3,8 +3,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
 public class GameServer {
-    static final int PORT = 1099;
-    static final String ROOT_URL = ":1099/GameServer";
+    static final int PORT = 10991;
+    static final String ROOT_URL = ":10991/GameServer";
     static final String PLAYER_URL = "Client";
 
     // static Game gameClass = null;
@@ -29,7 +29,7 @@ public class GameServer {
         }
         
         try {
-            String game = "rmi://" + args[0] + "/" + ROOT_URL;
+            String game = "rmi://" + args[0] + ROOT_URL;
             Naming.rebind(game, new Game());
             System.out.println("Game server is ready");
         } catch (Exception e) {

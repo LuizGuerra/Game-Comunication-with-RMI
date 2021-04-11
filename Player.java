@@ -25,7 +25,7 @@ public class Player extends UnicastRemoteObject implements PlayerInterface {
     }
 
     public void start() throws RemoteException {
-        // System.out.println("Player " + id + "começou");
+        System.out.println("Player " + id + "começou");
         start = true;
     }
     

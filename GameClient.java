@@ -62,7 +62,7 @@ public class GameClient {
             try {
                 int i = 0;
                 if (userID == -1) {
-                    userID = server.register();
+                    userID = server.register(Integer.parseInt(args[2]));
                 }
                 if (Player.start) {
                     while (i < 20) {

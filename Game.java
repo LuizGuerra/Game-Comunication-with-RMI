@@ -39,10 +39,10 @@ public class Game extends UnicastRemoteObject implements GameInterface {
     //     return listSize;
     // }
     
-    public int register() throws RemoteException {
+    public int register(int port) throws RemoteException {
         try {
             clientIP = getClientHost();
-            playersRMI.put(connections, "rmi://" + clientIP + "/" + PLAYER_URL);
+            playersRMI.put(connections, "rmi://" + clientIP + ":" + port + "/" + PLAYER_URL);
         } catch (Exception e) {
             System.out.println("Falha no registro");
             e.printStackTrace();

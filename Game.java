@@ -53,18 +53,7 @@ public class Game extends UnicastRemoteObject implements GameInterface {
     }
 
     public int play(int id) throws RemoteException {
-        try {
-            System.out.println("Player " + id + " jogou");
-            var r = Math.random();
-            if (r < 0.1) {
-                quit(id); //end ou quit?
-            }
-
-        } catch (Exception e) {
-            System.out.println("Jogada Falhou");
-            e.printStackTrace();
-        }
-
+        System.out.println("Player " + id + " jogou");
         return 1;
     }
 

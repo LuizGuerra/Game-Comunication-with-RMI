@@ -35,16 +35,12 @@ public class Player extends UnicastRemoteObject implements PlayerInterface {
     
     public void bonus() throws RemoteException {
         int calculatedProbability = random.nextInt(101); 
-        if(BONUS_PROBABILITY < calculatedProbability) {
+        if(calculatedProbability < BONUS_PROBABILITY) {
             System.out.println("Player @" + id + " received a bonus");
         }
     }
 
     public void verify() throws RemoteException {
         System.out.println("Jogador @" + id + " está conectado.");
-    }
-
-    public static long randomTime() {
-        return 0;
     }
 }

@@ -9,6 +9,10 @@ class GameTimerTask extends TimerTask {
 
     @Override
     public void run() {
-        this.playerReference.verify();
+        try {
+            this.playerReference.verify();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

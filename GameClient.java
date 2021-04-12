@@ -28,7 +28,7 @@ public class GameClient {
         }
 
         Integer userID = -1;
-        Player player;
+        Player player = null;
         try {
             player = new Player();
             String client = "rmi://" + args[1] + ":" + args[2] + "/" + PLAYER_URL;
@@ -70,7 +70,7 @@ public class GameClient {
                             System.out.println("Player @" + userID + " is thinking.");
                             randomInterval();
                             if(Math.random() < 0.1) {
-                                server.quit();
+                                server.quit(userID);
                                 break;
                             }
                             server.play(userID);
@@ -85,10 +85,8 @@ public class GameClient {
                 }
             } catch (RemoteException e) {
                 e.printStackTrace();
-            } catch (InterruptedException e) {
+            } catch(Exception e) {
                 e.printStackTrace();
-            } catch() {
-
             }
             try {
                 Thread.sleep(100);

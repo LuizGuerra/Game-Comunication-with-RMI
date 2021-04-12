@@ -53,23 +53,23 @@ public class GameClient {
             e.printStackTrace();
         }
 
-        Timer timer = new Timer();
+        // Timer timer = new Timer();
 
         while (true) {
             try {
-                timer.schedule(new GameTimerTask(player), 30000);
+                // timer.schedule(new GameTimerTask(player), 30000);
                 int i = 0;
                 if (userID == -1) {
                     userID = server.register(Integer.parseInt(args[2]));
                     player.setID(userID);
                 }
                 if (Player.start) {
-                    timer.cancel();
+                    // timer.cancel();
                     while (i < 20) {
                         if (!Game.endClient) {
                             System.out.println("Player @" + userID + " is thinking.");
                             randomInterval();
-                            if(Math.random() < 0.05) {
+                            if(Math.random() < 0.05) { // quitting probability
                                 System.out.println("Player @" + userID + " rage quitted.");
                                 server.quit(userID);
                                 i = 21;

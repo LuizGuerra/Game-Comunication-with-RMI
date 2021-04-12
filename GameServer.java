@@ -61,7 +61,7 @@ public class GameServer {
                     }
                 });
 
-                Thread.sleep(3000); // ??
+                Thread.sleep(3000);
             } catch (Exception e) {
                 e.printStackTrace();
             }

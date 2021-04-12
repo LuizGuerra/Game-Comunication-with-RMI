@@ -1,6 +1,8 @@
 import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.util.*;
 
 public class GameServer {
     static final int PORT = 10991;
@@ -36,51 +38,54 @@ public class GameServer {
             System.out.println("Game server failed");
             e.printStackTrace();
         }
-        
-        while (true) {
-            if (Game.connections == maxPlayers) {
-                Game.playersRMI.forEach((conId, path) -> {
-                    try {
-                        PlayerInterface client = (PlayerInterface) Naming.lookup(path);
+
+        boolean flag = true;
+        while(flag) {
+            for(Map.Entry<Integer, String> entry : Game.playersRMI.entrySet()) {
+                try {
+                    PlayerInterface client = (PlayerInterface) Naming.lookup(entry.getValue());
+                    if(Game.connections == maxPlayers) {
                         client.start();
-                    } catch (Exception e) {
-                        System.out.println("Falha na inicialização");
-                        e.printStackTrace();
+                        flag = false;
                     }
-
-                });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-            try {
-                Game.playersRMI.forEach((conId, path) -> {
-                    try {
-                        PlayerInterface client = (PlayerInterface) Naming.lookup(path);
-                        client.verify();
-                    } catch (Exception e) {
-                        System.out.println("Falha na conexão");
-                        e.printStackTrace();
-                    }
-                });
-
-                Thread.sleep(3000);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            // Game.playersRMI.forEach((conId, path) -> {
+            // });
         }
         
-    }
-		// connections deve ser uma variavel da classe Game
-		// que sera incrementada pelo metodo registry
         
         // while (true) {
-        //     if (connections == maxPlayers)) {      
+        //     if (Game.connections == maxPlayers) {
+        //         Game.playersRMI.forEach((conId, path) -> {
+        //             try {
+        //                 PlayerInterface client = (PlayerInterface) Naming.lookup(path);
+        //                 client.start();
+        //             } catch (Exception e) {
+        //                 System.out.println("Falha na inicialização");
+        //                 e.printStackTrace();
+        //             }
+
+        //         });
+        //     }
+        //     try {
+        //         Game.playersRMI.forEach((conId, path) -> {
+        //             try {
+                        
+        //                 PlayerInterface client = (PlayerInterface) Naming.lookup(path);
+        //                 client.verify();
+        //             } catch (Exception e) {
+        //                 System.out.println("Falha na conexão");
+        //                 e.printStackTrace();
+        //             }
+        //         });
+
+        //         Thread.sleep(3000);
+        //     } catch (Exception e) {
+        //         e.printStackTrace();
         //     }
         // }
-        
-        // try {
-        //     Naming.rebind(PLAYER_URL, new Player());
-        //     System.out.println("Player server is ready");
-        // } catch (Exception e) {
-        //     System.out.println("Player server failed");
-        //     e.printStackTrace();
-        // }
+    }
 }

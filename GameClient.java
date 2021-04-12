@@ -44,7 +44,6 @@ public class GameClient {
         
         GameInterface server = null;
 
-        int quittingProbability = 5; // 5% chance of quitting
         
         try {
             System.out.println("Tentando conectar com server..");
@@ -70,7 +69,7 @@ public class GameClient {
                         if (!Game.endClient) {
                             System.out.println("Player @" + userID + " is thinking.");
                             randomInterval();
-                            if(Math.random() < 0.1) {
+                            if(Math.random() < 0.05) {
                                 server.quit(userID);
                                 i = 21;
                                 break;

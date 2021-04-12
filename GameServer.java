@@ -39,23 +39,17 @@ public class GameServer {
             e.printStackTrace();
         }
 
-        boolean flag = true;
-        while(flag) {
-            for(Map.Entry<Integer, String> entry : Game.playersRMI.entrySet()) {
-                try {
-                    PlayerInterface client = (PlayerInterface) Naming.lookup(entry.getValue());
-                    if(Game.connections == maxPlayers) {
-                        client.start();
-                        flag = false;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+        while(Game.connections != maxPlayers) { }
+        for(Map.Entry<Integer, String> entry : Game.playersRMI.entrySet()) {
+            try {
+                PlayerInterface client = (PlayerInterface) Naming.lookup(entry.getValue());
+                if(Game.connections == maxPlayers) {
+                    client.start();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            // Game.playersRMI.forEach((conId, path) -> {
-            // });
         }
-        
         
         // while (true) {
         //     if (Game.connections == maxPlayers) {

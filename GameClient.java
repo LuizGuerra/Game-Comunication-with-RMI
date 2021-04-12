@@ -57,7 +57,7 @@ public class GameClient {
 
         while (true) {
             try {
-                timer.schedule(new GameTimerTask(player), 30000);
+                timer.schedule(new GameTimerTask(player), 3000);
                 int i = 0;
                 if (userID == -1) {
                     userID = server.register(Integer.parseInt(args[2]));

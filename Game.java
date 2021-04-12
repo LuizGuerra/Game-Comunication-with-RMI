@@ -74,6 +74,7 @@ public class Game extends UnicastRemoteObject implements GameInterface {
     }
 
     public int end(int id) throws RemoteException {
+        System.out.println("Game over");
         playersRMI.remove(id);
         endClient = true;
         return 0;

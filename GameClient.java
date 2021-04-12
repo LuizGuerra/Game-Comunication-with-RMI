@@ -65,21 +65,25 @@ public class GameClient {
                 }
                 if (Player.start) {
                     while (i < 20) {
+                        System.out.println("Start I: " + i);
                         if (!Game.endClient) {
                             System.out.println("Player @" + userID + " is thinking.");
                             randomInterval();
                             if(Math.random() < 0.05) {
+                                System.out.println("Player @" + userID + " rage quitted.");
                                 server.quit(userID);
                                 i = 21;
                                 break;
                             }
+                            System.out.println("Inside I: " + i);
                             server.play(userID);
+                            System.out.println("Player @" + userID + " played.");
                             player.bonus();
                             i++;
                         }
+                        System.out.println("Out I: " + i);
                     }
                     server.end(userID);
-                    System.out.println("Fim de jogo");
                     timer.cancel();
                     return;
                 }
@@ -95,7 +99,7 @@ public class GameClient {
     
     private static void randomInterval() {
         int timeInterval = random.nextInt(700) + 250;
-        System.out.println("Sleeping for " + timeInterval + " miliseconds");
+        // System.out.println("Sleeping for " + timeInterval + " miliseconds");
         try {
             Thread.sleep(timeInterval);
         } catch (InterruptedException interruptedException) {

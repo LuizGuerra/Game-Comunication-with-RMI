@@ -55,11 +55,6 @@ public class GameClient {
 
         Timer timer = new Timer();
         System.out.println("Player: " + player);
-        try {
-            System.out.println("Player id: " + player.getID());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         while (true) {
             try {

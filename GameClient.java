@@ -54,7 +54,6 @@ public class GameClient {
         }
 
         Timer timer = new Timer();
-        System.out.println("Player: " + player);
 
         while (true) {
             try {

@@ -25,13 +25,10 @@ public class Player extends UnicastRemoteObject implements PlayerInterface {
     }
     
     public void bonus() throws RemoteException {
-        System.out.println("Player Bonus 01");
         int calculatedProbability = random.nextInt(101); 
-        System.out.println("Player Bonus 02");// Because 0% and 100% are valid numbers
         if(BONUS_PROBABILITY < calculatedProbability) {
             System.out.println("Player @" + id + " received a bonus");
         }
-        System.out.println("Player Bonus 03");
     }
 
     public void verify() throws RemoteException {

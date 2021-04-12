@@ -2,6 +2,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.Random;
+import java.util.Timer;
 
 public class GameClient {
     // static final int SERVER_PORT = 10991;
@@ -16,10 +17,6 @@ public class GameClient {
 			System.out.println("Usage: java GameClient <server ip> <client ip> <client port>");
 			System.exit(1);
 		}
-        // final String GAME_PATH = "//" + args[0] + "/" + ROOT_URL;
-        // GameInterface gameInterface;
-        // Integer userID = -1;
-        // PlayerInterface playerInterface;
 
         try {
             System.setProperty("java.rmi.server.hostname", args[1]);
@@ -31,10 +28,11 @@ public class GameClient {
         }
 
         Integer userID = -1;
-
+        Player player;
         try {
+            player = new Player();
             String client = "rmi://" + args[1] + ":" + args[2] + "/" + PLAYER_URL;
-            Naming.rebind(client, new Player());
+            Naming.rebind(client, player);
             System.out.println("Player RMI is ready");
         } catch (Exception e) {
             System.out.println("Player RMI failed");
@@ -46,9 +44,7 @@ public class GameClient {
         
         GameInterface server = null;
 
-        // String client = "rmi://" + args[1] + "/" + PLAYER_URL;
-
-        // PlayerInterface clientInterface = (PlayerInterface) Naming.lookup(client);
+        int quittingProbability = 5; // 5% chance of quitting
         
         try {
             System.out.println("Tentando conectar com server..");
@@ -58,9 +54,11 @@ public class GameClient {
             e.printStackTrace();
         }
 
+        Timer timer = new Timer();
+
         while (true) {
             try {
-                System.out.println("Chegou no try do while");
+                timer.schedule(new GameTimerTask(player), 3000);
                 int i = 0;
                 if (userID == -1) {
                     System.out.println("Entrou no if");
@@ -69,19 +67,28 @@ public class GameClient {
                 if (Player.start) {
                     while (i < 20) {
                         if (!Game.endClient) {
+                            System.out.println("Player @" + userID + " is thinking.");
+                            randomInterval();
+                            if(Math.random() < 0.1) {
+                                server.quit();
+                                break;
+                            }
                             server.play(userID);
-                            Thread.sleep(Player.randomTime()); //verificar se não está no metodo já o sleep
+                            player.bonus();
                             i++;
                         }
                     }
-                    server.quit(userID);
+                    server.end(userID);
                     System.out.println("Fim de jogo");
+                    timer.cancel();
                     return;
                 }
             } catch (RemoteException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            } catch() {
+
             }
             try {
                 Thread.sleep(100);
@@ -90,32 +97,15 @@ public class GameClient {
         }
         
     }
-}
     
-        // server.registry();
-        // player.start();
+    private static void randomInterval() {
+        int timeInterval = random.nextInt(700) + 250;
+        System.out.println("Sleeping for " + timeInterval + " miliseconds");
+        try {
+            Thread.sleep(timeInterval);
+        } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
+        }
+    }
 
-        // try {
-        //     gameInterface = (GameInterface) Naming.lookup(GAME_PATH);
-        //     userID = gameInterface.register();
-        //     System.out.println("Client @" + userID + " was successfully conected with server!");
-        // } catch (Exception e) {
-        //     System.out.println("rmi.Game client failed");
-        //     e.printStackTrace();
-        // }
-
-    //     int numberOfPlays = random.nextInt(50) + 10;
-    //     for(int i = 0; i < numberOfPlays; i++) {
-    //         playerInterface.play();
-    //     }
-    // }
-
-    // private static void randomInterval() {
-    //     int timeInterval = random.nextInt(700) + 250;
-    //     System.out.println("Sleeping for " + timeInterval + " miliseconds");
-    //     try {
-    //         Thread.sleep(timeInterval);
-    //     } catch (InterruptedException interruptedException) {
-    //         interruptedException.printStackTrace();
-    //     }
-    // }
+}

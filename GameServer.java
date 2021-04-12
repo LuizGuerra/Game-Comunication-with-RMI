@@ -54,6 +54,7 @@ public class GameServer {
                 Game.playersRMI.forEach((conId, path) -> {
                     try {
                         PlayerInterface client = (PlayerInterface) Naming.lookup(path);
+                        client.verify();
                     } catch (Exception e) {
                         System.out.println("Falha na conexão");
                         e.printStackTrace();
@@ -67,4 +68,19 @@ public class GameServer {
         }
         
     }
+		// connections deve ser uma variavel da classe Game
+		// que sera incrementada pelo metodo registry
+        
+        // while (true) {
+        //     if (connections == maxPlayers)) {      
+        //     }
+        // }
+        
+        // try {
+        //     Naming.rebind(PLAYER_URL, new Player());
+        //     System.out.println("Player server is ready");
+        // } catch (Exception e) {
+        //     System.out.println("Player server failed");
+        //     e.printStackTrace();
+        // }
 }

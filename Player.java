@@ -16,7 +16,9 @@ public class Player extends UnicastRemoteObject implements PlayerInterface {
 
     public static boolean start = false;
 
-    public Player() throws RemoteException { }
+    public Player() throws RemoteException {
+        random = new Random();
+    }
 
     public int getID() throws RemoteException {
         return this.id;

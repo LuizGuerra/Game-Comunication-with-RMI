@@ -5,7 +5,6 @@ import java.util.Random;
 import java.util.Timer;
 
 public class GameClient {
-    // static final int SERVER_PORT = 10991;
     static final String ROOT_URL = ":10991/GameServer";
     static final String PLAYER_URL = "Client";
     

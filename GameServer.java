@@ -8,10 +8,6 @@ public class GameServer {
     static final int PORT = 10991;
     static final String ROOT_URL = ":10991/GameServer";
     static final String PLAYER_URL = "Client";
-
-    // static Game gameClass = null;
-    // static Game game = null;
-    // static Player player = null;
     
     public static void main (String[] args) {
         if	(args.length != 2)  {
@@ -21,7 +17,6 @@ public class GameServer {
         System.out.println("Max number of players in game: " + args[1]);
         int maxPlayers = Integer.parseInt(args[1]);
         try {
-            // System.setProperty(key, value);
             System.setProperty("java.rmi.server.hostname", args[0]);
             LocateRegistry.createRegistry(PORT);
             System.out.println("RMI registry ready");
@@ -50,36 +45,5 @@ public class GameServer {
                 e.printStackTrace();
             }
         }
-        
-        // while (true) {
-        //     if (Game.connections == maxPlayers) {
-        //         Game.playersRMI.forEach((conId, path) -> {
-        //             try {
-        //                 PlayerInterface client = (PlayerInterface) Naming.lookup(path);
-        //                 client.start();
-        //             } catch (Exception e) {
-        //                 System.out.println("Falha na inicialização");
-        //                 e.printStackTrace();
-        //             }
-
-        //         });
-        //     }
-        //     try {
-        //         Game.playersRMI.forEach((conId, path) -> {
-        //             try {
-                        
-        //                 PlayerInterface client = (PlayerInterface) Naming.lookup(path);
-        //                 client.verify();
-        //             } catch (Exception e) {
-        //                 System.out.println("Falha na conexão");
-        //                 e.printStackTrace();
-        //             }
-        //         });
-
-        //         Thread.sleep(3000);
-        //     } catch (Exception e) {
-        //         e.printStackTrace();
-        //     }
-        // }
     }
 }

@@ -5,12 +5,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
 
 public class Game extends UnicastRemoteObject implements GameInterface {
-    /**
-     *
-     */
+    
     private static final long serialVersionUID = 5675296890212610484L;
-    // @Serial private static final long serialVersionUID = 12312312312313L;
-    // private volatile List<Player> users;
 
     private static volatile String clientIP;
     public static volatile HashMap<Integer, String> playersRMI = new HashMap<>();
@@ -18,11 +14,8 @@ public class Game extends UnicastRemoteObject implements GameInterface {
     static final String PLAYER_URL = "Client";
 
     public static boolean endClient = false;
-    // final int maxNumberOfPlayers;
 
-    public Game() throws RemoteException {
-
-    }
+    public Game() throws RemoteException { }
     
     public int register(int port) throws RemoteException {
         try {

@@ -9,7 +9,6 @@ public class Player extends UnicastRemoteObject implements PlayerInterface {
      *
      */
     private static final long serialVersionUID = 70855187886381799L;
-    // @Serial private static final long serialVersionUID = 32112312312313L;
     private final Integer BONUS_PROBABILITY = 3; // 3%
     private Random random;
     private int id;

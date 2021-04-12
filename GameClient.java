@@ -55,13 +55,14 @@ public class GameClient {
         }
 
         Timer timer = new Timer();
+        System.out.println("Player: " + player);
+        System.out.println("Player id: " + player.getID);
 
         while (true) {
             try {
-                timer.schedule(new GameTimerTask(player), 3000);
+                timer.schedule(new GameTimerTask(player), 30000);
                 int i = 0;
                 if (userID == -1) {
-                    System.out.println("Entrou no if");
                     userID = server.register(Integer.parseInt(args[2]));
                 }
                 if (Player.start) {
@@ -71,6 +72,7 @@ public class GameClient {
                             randomInterval();
                             if(Math.random() < 0.1) {
                                 server.quit(userID);
+                                i = 21;
                                 break;
                             }
                             server.play(userID);
@@ -83,14 +85,11 @@ public class GameClient {
                     timer.cancel();
                     return;
                 }
+                Thread.sleep(10000);
             } catch (RemoteException e) {
                 e.printStackTrace();
             } catch(Exception e) {
                 e.printStackTrace();
-            }
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ex) {
             }
         }
         

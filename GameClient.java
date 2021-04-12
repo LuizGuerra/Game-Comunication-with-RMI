@@ -65,7 +65,6 @@ public class GameClient {
                 }
                 if (Player.start) {
                     while (i < 20) {
-                        System.out.println("Start   I: " + i);
                         if (!Game.endClient) {
                             System.out.println("Player @" + userID + " is thinking.");
                             randomInterval();
@@ -75,13 +74,11 @@ public class GameClient {
                                 i = 21;
                                 break;
                             }
-                            System.out.println("Inside  I: " + i);
                             server.play(userID);
                             System.out.println("Player @" + userID + " played.");
                             player.bonus();
                             i++;
                         }
-                        System.out.println("Out     I: " + i);
                     }
                     server.end(userID);
                     timer.cancel();

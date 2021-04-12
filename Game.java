@@ -23,21 +23,6 @@ public class Game extends UnicastRemoteObject implements GameInterface {
     public Game() throws RemoteException {
 
     }
-    // public Game(int maxPlayers) throws RemoteException {
-    //     users = new ArrayList<>(maxPlayers);
-    //     maxNumberOfPlayers = maxPlayers;
-    // }
-
-    // public int register() throws RemoteException {
-    //     System.out.println("Creating new register");
-    //     int listSize = users.size();
-    //     if(listSize == maxNumberOfPlayers) {
-    //         throw new RemoteException("Max number of players in game reached.");
-    //     }
-    //     users.add(listSize);
-    //     System.out.println("Created new player ID: @" + listSize);
-    //     return listSize;
-    // }
     
     public int register(int port) throws RemoteException {
         try {
@@ -53,7 +38,7 @@ public class Game extends UnicastRemoteObject implements GameInterface {
     }
 
     public int play(int id) throws RemoteException {
-        System.out.println("Player " + id + " jogou");
+        System.out.println("Player " + id + " played");
         return 1;
     }
 
@@ -63,7 +48,7 @@ public class Game extends UnicastRemoteObject implements GameInterface {
     }
 
     public int end(int id) throws RemoteException {
-        System.out.println("Game over");
+        System.out.println("Player @" + id + "Game over");
         playersRMI.remove(id);
         endClient = true;
         return 0;

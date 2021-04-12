@@ -29,7 +29,7 @@ public class Player extends UnicastRemoteObject implements PlayerInterface {
     }
 
     public void start() throws RemoteException {
-        System.out.println("Player " + id + "começou");
+        System.out.println("Player @" + id + " started");
         start = true;
     }
     
@@ -41,6 +41,6 @@ public class Player extends UnicastRemoteObject implements PlayerInterface {
     }
 
     public void verify() throws RemoteException {
-        System.out.println("Jogador @" + id + " está conectado.");
+        System.out.println("Player @" + id + " is connected.");
     }
 }

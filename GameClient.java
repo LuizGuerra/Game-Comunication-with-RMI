@@ -46,7 +46,7 @@ public class GameClient {
 
         
         try {
-            System.out.println("Tentando conectar com server..");
+            System.out.println("Trying to connect with server..");
             server = (GameInterface) Naming.lookup(serverConnection);
         } catch (Exception e) {
             System.out.println("Erro na conexao..");
@@ -64,6 +64,7 @@ public class GameClient {
                     player.setID(userID);
                 }
                 if (Player.start) {
+                    timer.cancel();
                     while (i < 20) {
                         if (!Game.endClient) {
                             System.out.println("Player @" + userID + " is thinking.");
@@ -81,7 +82,6 @@ public class GameClient {
                         }
                     }
                     server.end(userID);
-                    timer.cancel();
                     return;
                 }
                 Thread.sleep(10000);
@@ -96,7 +96,6 @@ public class GameClient {
     
     private static void randomInterval() {
         int timeInterval = random.nextInt(700) + 250;
-        // System.out.println("Sleeping for " + timeInterval + " miliseconds");
         try {
             Thread.sleep(timeInterval);
         } catch (InterruptedException interruptedException) {

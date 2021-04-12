@@ -61,6 +61,7 @@ public class GameClient {
                 int i = 0;
                 if (userID == -1) {
                     userID = server.register(Integer.parseInt(args[2]));
+                    player.setID(userID);
                 }
                 if (Player.start) {
                     while (i < 20) {

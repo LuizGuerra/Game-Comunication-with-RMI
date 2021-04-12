@@ -12,11 +12,20 @@ public class Player extends UnicastRemoteObject implements PlayerInterface {
     // @Serial private static final long serialVersionUID = 32112312312313L;
     private final Integer BONUS_PROBABILITY = 3; // 3%
     private Random random;
+    private int id;
 
     public static boolean start = false;
 
     public Player() throws RemoteException {
         random = new Random();
+    }
+
+    public int getID() throws RemoteException {
+        return this.id;
+    }
+
+    public void setID(int id) {
+        this.id = id;
     }
 
     public void start() throws RemoteException {
